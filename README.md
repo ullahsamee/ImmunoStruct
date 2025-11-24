@@ -12,8 +12,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/KrishnaswamyLab/ImmunoStruct.svg?style=social\&label=Stars)](https://github.com/KrishnaswamyLab/ImmunoStruct)
 
   <p align="center">
-    <b>ImmunoStruct</b>: A multimodal neural network framework for immunogenicity prediction<br>
-    from peptide-MHC sequence, structure, and biochemical properties
+    <b>ImmunoStruct enables multimodal deep learning for immunogenicity prediction</b>
   </p>
 </div>
 
@@ -54,14 +53,14 @@
   <img src="assets/schematic.png" alt="ImmunoStruct Architecture" width="800">
 </div>
 
-ImmunoStruct is a multimodal deep learning framework that integrates sequence, structural, and biochemical information to predict multi-allele class-I peptide-MHC immunogenicity. By leveraging multimodal data from ~27,000 peptide-MHCs and jointly modeling sequence and structure, ImmunoStruct significantly improves immunogenicity prediction performance for both infectious disease epitopes and cancer neoepitopes.
+ImmunoStruct is a multimodal deep learning framework that integrates sequence, structural, and biochemical information to predict multi-allele class-I peptide-MHC immunogenicity. By leveraging multimodal data from 26,049 peptide-MHCs and jointly modeling sequence and structure, ImmunoStruct significantly improves immunogenicity prediction performance for both infectious disease epitopes and cancer neoepitopes.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Key Features
 
 * **Multimodal Integration**: Combines peptide-MHC protein sequence, structure, and biochemical properties
-* **Novel Cancer-Wildtype Contrastive Learning**: Enhances specificity for cancer neoepitope detection  
+* **Novel Cancer-Wildtype Contrastive Learning**: Enhances specificity for cancer neoepitope detection
 * **Enhanced Interpretability**: Provides insights into the substructural basis of immunogenicity
 
 <div align="center">
@@ -183,23 +182,23 @@ python immunostruct/preprocessing/cancer_graph_construction_new_KBG.py
 ### Training and Testing
 
 1. **Set up Weights & Biases**
-   
+
    Create a project on [Weights & Biases](https://wandb.ai/home) matching your project name.
 
 2. **Run Experiments**
    ```sh
    # HybridModelv2 with full sequence and sequence loss
    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model HybridModelv2 --wandb-username YOUR_WANDB_USERNAME
-   
+
    # HybridModel with full sequence and sequence loss
    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model HybridModel --wandb-username YOUR_WANDB_USERNAME
-   
+
    # Sequence with fingerprint model
    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model SequenceFpModel --wandb-username YOUR_WANDB_USERNAME
-   
+
    # Sequence-only model
    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model SequenceModel --wandb-username YOUR_WANDB_USERNAME
-   
+
    # Structure-only model
    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --model StructureModel --wandb-username YOUR_WANDB_USERNAME
    ```
