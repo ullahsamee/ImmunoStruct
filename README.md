@@ -7,6 +7,7 @@
   <h1 align="center">ImmunoStruct</h1>
 
 <!-- PROJECT SHIELDS -->
+[![nature](https://img.shields.io/badge/nature-machine_intelligence-blue)](https://www.nature.com/articles/s42256-025-01163-y)
 [![bioRxiv](https://img.shields.io/badge/bioRxiv-ImmunoStruct-firebrick)](https://www.biorxiv.org/content/10.1101/2024.11.01.621580)
 [![Twitter Follow](https://img.shields.io/twitter/follow/KrishnaswamyLab.svg?style=social)](https://twitter.com/KrishnaswamyLab)
 [![GitHub Stars](https://img.shields.io/github/stars/KrishnaswamyLab/ImmunoStruct.svg?style=social\&label=Stars)](https://github.com/KrishnaswamyLab/ImmunoStruct)
