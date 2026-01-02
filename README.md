@@ -55,8 +55,8 @@
 
 ## News
 &#9744; TODO: create and release an end-to-end tool.
-<br>&#x2705; Published at Nature Machine Intelligence on Dec 31, 2025.
-<br>&#x2705; Preprint released at bioRxiv on Nov 01, 2024.
+<br>&#x2705; Dec 31, 2025: Published in Nature Machine Intelligence.
+<br>&#x2705; Nov 01, 2024: Preprint released on bioRxiv.
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
