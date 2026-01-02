@@ -90,6 +90,7 @@ ImmunoStruct is a multimodal deep learning framework that integrates sequence, s
 
 If you use ImmunoStruct in your research, please cite our paper:
 
+BibTeX:
 ```bibtex
 @article{givechian2025immunostruct,
   title={ImmunoStruct enables multimodal deep learning for immunogenicity prediction},
@@ -100,6 +101,10 @@ If you use ImmunoStruct in your research, please cite our paper:
   publisher={Nature Publishing Group UK London}
 }
 ```
+Nature format:
+
+Givechian, K.B., Rocha, J.F., Liu, C. et al. ImmunoStruct enables multimodal deep learning for immunogenicity prediction. _Nat Mach Intell_ (2025). https://doi.org/10.1038/s42256-025-01163-y
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
