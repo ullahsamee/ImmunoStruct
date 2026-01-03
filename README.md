@@ -4,23 +4,18 @@
 
 <div align="center">
 
-  <img src="assets/ImmunoStruct_cover.png" alt="ImmunoStruct logo" width="256">
   <h1><code>ImmunoStruct</code></h1>
 
-<!-- PROJECT SHIELDS -->
-[![nature](https://img.shields.io/badge/nature-machine_intelligence-white)](https://www.nature.com/articles/s42256-025-01163-y)
-[![bioRxiv](https://img.shields.io/badge/bioRxiv-ImmunoStruct-firebrick)](https://www.biorxiv.org/content/10.1101/2024.11.01.621580)
-![Python](https://img.shields.io/badge/Python-3.10-3776ab)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.1.2-ee4c2c)
-[![Twitter Follow](https://img.shields.io/twitter/follow/KrishnaswamyLab.svg?style=social)](https://twitter.com/KrishnaswamyLab)
-[![GitHub Stars](https://img.shields.io/github/stars/KrishnaswamyLab/ImmunoStruct.svg?style=social\&label=Stars)](https://github.com/KrishnaswamyLab/ImmunoStruct)
-
-  <p align="center">
-    <b>ImmunoStruct enables multimodal deep learning for immunogenicity prediction</b>
-  </p>
+  [![nature](https://img.shields.io/badge/nature-machine_intelligence-white)](https://www.nature.com/articles/s42256-025-01163-y)
+  [![bioRxiv](https://img.shields.io/badge/bioRxiv-ImmunoStruct-firebrick)](https://www.biorxiv.org/content/10.1101/2024.11.01.621580)
+  ![Python](https://img.shields.io/badge/Python-3.10-3776ab)
+  ![PyTorch](https://img.shields.io/badge/PyTorch-2.1.2-ee4c2c)
+  [![Twitter Follow](https://img.shields.io/twitter/follow/KrishnaswamyLab.svg?style=social)](https://twitter.com/KrishnaswamyLab)
+  [![GitHub Stars](https://img.shields.io/github/stars/KrishnaswamyLab/ImmunoStruct.svg?style=social\&label=Stars)](https://github.com/KrishnaswamyLab/ImmunoStruct)
 
 </div>
 
+This is the official implementation of the paper <b>ImmunoStruct enables multimodal deep learning for immunogenicity prediction</b>.
 
 <!-- TABLE OF CONTENTS -->
 <details>
