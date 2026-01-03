@@ -13,9 +13,13 @@
   [![Twitter Follow](https://img.shields.io/twitter/follow/KrishnaswamyLab.svg?style=social)](https://twitter.com/KrishnaswamyLab)
   [![GitHub Stars](https://img.shields.io/github/stars/KrishnaswamyLab/ImmunoStruct.svg?style=social\&label=Stars)](https://github.com/KrishnaswamyLab/ImmunoStruct)
 
+<b>ImmunoStruct enables multimodal deep learning for immunogenicity prediction</b>
+
 </div>
 
-This is the official implementation of the paper <b>ImmunoStruct enables multimodal deep learning for immunogenicity prediction</b>.
+<div align="center">
+  <img src="assets/ImmunoStruct_cover.png" width="300">
+</div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
