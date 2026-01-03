@@ -4,7 +4,8 @@
 
 <div align="center">
 
-  <h1 align="center"><code>ImmunoStruct</code></h1>
+  <img src="assets/ImmunoStruct_cover.png" alt="ImmunoStruct logo" width="256">
+  <h1><code>ImmunoStruct</code></h1>
 
 <!-- PROJECT SHIELDS -->
 [![nature](https://img.shields.io/badge/nature-machine_intelligence-white)](https://www.nature.com/articles/s42256-025-01163-y)
