@@ -101,9 +101,8 @@ BibTeX:
   publisher={Nature Publishing Group UK London}
 }
 ```
-Nature format:
-
-Givechian, K.B., Rocha, J.F., Liu, C. et al. ImmunoStruct enables multimodal deep learning for immunogenicity prediction. _Nat Mach Intell_ (2025). https://doi.org/10.1038/s42256-025-01163-y
+Nature format:<br>
+Givechian, K.B., Rocha, J.F., Liu, C. et al. ImmunoStruct enables multimodal deep learning for immunogenicity prediction. *Nat Mach Intell* (2025). https://doi.org/10.1038/s42256-025-01163-y
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
