@@ -67,7 +67,7 @@ News in English<br>
 [![news](https://img.shields.io/badge/news-GeneOnline-silver)](https://www.geneonline.com/deep-learning-model-immunostruct-developed-to-improve-prediction-of-immunogenic-epitopes-for-vaccine-research/)
 
 News in Chinese<br>
-[![news](https://img.shields.io/badge/news-Tencent_Cloud-silver)](https://cloud.tencent.com/developer/article/2612794)
+[![news](https://img.shields.io/badge/news-腾讯云_Tencent_Cloud-silver)](https://cloud.tencent.com/developer/article/2612794)
 
 
 &#9744; TODO: create and release an end-to-end tool.
