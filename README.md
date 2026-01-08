@@ -20,6 +20,7 @@
   
 <b>ImmunoStruct enables multimodal deep learning for immunogenicity prediction</b>
 
+
 </div>
 
 <div align="center">
@@ -59,6 +60,10 @@
 </details>
 
 ## News
+[![news](https://img.shields.io/badge/news-Decoding_Bio-pink)](https://decodingbio.substack.com/p/biobyte-144-a-virtual-model-of-cell?utm_source=post-email-title&publication_id=1079498&post_id=183883975&utm_campaign=email-post-title&isFreemail=true&r=1lwga0&triedRedirect=true&utm_medium=email)
+[![news](https://img.shields.io/badge/news-Bioengineer-pink)](https://bioengineer.org/immunostruct-advancing-deep-learning-in-immunogenicity-prediction/)
+
+
 &#9744; TODO: create and release an end-to-end tool.
 <br>&#x2705; Dec 31, 2025: **[Published](https://www.nature.com/articles/s42256-025-01163-y) in Nature Machine Intelligence.**
 <br>&#x2705; Dec 04, 2025: Informally presented at NeurIPS 2025 (did not submit, no dual-submission concern).
