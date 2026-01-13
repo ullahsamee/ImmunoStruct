@@ -57,6 +57,8 @@ News in English<br>
 [![news](https://img.shields.io/badge/news-Decoding_Bio-silver)](https://decodingbio.substack.com/p/biobyte-144-a-virtual-model-of-cell)
 [![news](https://img.shields.io/badge/news-Bioengineer-silver)](https://bioengineer.org/immunostruct-advancing-deep-learning-in-immunogenicity-prediction/)
 [![news](https://img.shields.io/badge/news-GeneOnline-silver)](https://www.geneonline.com/deep-learning-model-immunostruct-developed-to-improve-prediction-of-immunogenic-epitopes-for-vaccine-research/)
+<br>[![wiki](https://img.shields.io/badge/wiki-Wikipedia_Immunogenicity-pink)](https://en.wikipedia.org/wiki/Immunogenicity)
+
 
 News in Chinese<br>
 [![news](https://img.shields.io/badge/news-新智元@网易-gold)](https://www.163.com/dy/article/KJ13HJ340511ABV6.html)
