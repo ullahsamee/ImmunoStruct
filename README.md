@@ -62,8 +62,9 @@ News in Chinese<br>
 [![news](https://img.shields.io/badge/news-新智元@网易-gold)](https://www.163.com/dy/article/KJ13HJ340511ABV6.html)
 [![news](https://img.shields.io/badge/news-腾讯云_Tencent_Cloud-silver)](https://cloud.tencent.com/developer/article/2612794)
 <br>[![news](https://img.shields.io/badge/news-新智元@搜狐-F6E7B2)](https://m.sohu.com/a/974949014_473283)
-[![news](https://img.shields.io/badge/news-新浪_转发_新智元-F6E7B2)](https://finance.sina.com.cn/stock/t/2026-01-11/doc-inhfxvtm9135944.shtml)
+[![news](https://img.shields.io/badge/news-新浪财经_转发_新智元-F6E7B2)](https://finance.sina.com.cn/stock/t/2026-01-11/doc-inhfxvtm9135944.shtml)
 [![news](https://img.shields.io/badge/news-AI中文社_转发_新智元-F6E7B2)](https://www.aizws.net/news/detail/6922)
+[![news](https://img.shields.io/badge/news-百度_转发_新智元-F6E7B2)](https://baijiahao.baidu.com/s?id=1854022994702774585)
 <br>[![wiki](https://img.shields.io/badge/wiki-百度百科_免疫原性-pink)](https://baike.baidu.com/item/%E5%85%8D%E7%96%AB%E5%8E%9F%E6%80%A7/5292060)
 [![wiki](https://img.shields.io/badge/wiki-百度百科_图神经网络-pink)](https://baike.baidu.com/item/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/59091829)
 
