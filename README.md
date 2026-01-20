@@ -7,7 +7,7 @@
   <h3>ImmunoStruct enables multimodal deep learning for immunogenicity prediction</h3>
   
   [![nature](https://img.shields.io/badge/nature_machine_intelligence-gold)](https://www.nature.com/articles/s42256-025-01163-y)
-  [![PDF](https://img.shields.io/badge/PDF-lightgray)](https://www.nature.com/articles/s42256-025-01163-y.pdf)
+  [![PDF](https://img.shields.io/badge/PDF-DADBDD)](https://www.nature.com/articles/s42256-025-01163-y.pdf)
   ![Python](https://img.shields.io/badge/Python-3.10-3776ab)
   ![PyTorch](https://img.shields.io/badge/PyTorch-2.1.2-ee4c2c)
   [![GitHub Stars](https://img.shields.io/github/stars/KrishnaswamyLab/ImmunoStruct.svg?style=social\&label=Stars)](https://github.com/KrishnaswamyLab/ImmunoStruct)
@@ -54,15 +54,15 @@
 ## News
 
 News in English<br>
-[![news](https://img.shields.io/badge/news-Decoding_Bio-silver)](https://decodingbio.substack.com/p/biobyte-144-a-virtual-model-of-cell)
-[![news](https://img.shields.io/badge/news-Bioengineer-silver)](https://bioengineer.org/immunostruct-advancing-deep-learning-in-immunogenicity-prediction/)
-[![news](https://img.shields.io/badge/news-GeneOnline-silver)](https://www.geneonline.com/deep-learning-model-immunostruct-developed-to-improve-prediction-of-immunogenic-epitopes-for-vaccine-research/)
+[![news](https://img.shields.io/badge/news-Decoding_Bio-DADBDD)](https://decodingbio.substack.com/p/biobyte-144-a-virtual-model-of-cell)
+[![news](https://img.shields.io/badge/news-Bioengineer-DADBDD)](https://bioengineer.org/immunostruct-advancing-deep-learning-in-immunogenicity-prediction/)
+[![news](https://img.shields.io/badge/news-GeneOnline-DADBDD)](https://www.geneonline.com/deep-learning-model-immunostruct-developed-to-improve-prediction-of-immunogenic-epitopes-for-vaccine-research/)
 <br>[![wiki](https://img.shields.io/badge/wiki-Wikipedia_Immunogenicity-pink)](https://en.wikipedia.org/wiki/Immunogenicity)
 
 
 News in Chinese<br>
 [![news](https://img.shields.io/badge/news-新智元@网易-gold)](https://www.163.com/dy/article/KJ13HJ340511ABV6.html)
-[![news](https://img.shields.io/badge/news-腾讯云_Tencent_Cloud-silver)](https://cloud.tencent.com/developer/article/2612794)
+[![news](https://img.shields.io/badge/news-腾讯云_(Tencent_Cloud)-DADBDD)](https://cloud.tencent.com/developer/article/2612794)
 <br>[![news](https://img.shields.io/badge/news-新智元@搜狐-F6E7B2)](https://m.sohu.com/a/974949014_473283)
 [![news](https://img.shields.io/badge/news-新智元@智源社区-F6E7B2)](https://hub.baai.ac.cn/view/51813)
 [![news](https://img.shields.io/badge/news-新浪财经_转发_新智元-F6E7B2)](https://finance.sina.com.cn/stock/t/2026-01-11/doc-inhfxvtm9135944.shtml)
