@@ -19,6 +19,8 @@
   [![Twitter Follow](https://img.shields.io/twitter/follow/KrishnaswamyLab.svg?style=social)](https://x.com/KrishnaswamyLab)
 </div>
 
+In case you don't have access to Nature, here are the [main paper](pdf/ImmunoStruct_NMI.pdf) and the [supplementary materials](pdf/ImmunoStruct_NMI_supp.pdf).
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
