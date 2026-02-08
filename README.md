@@ -114,17 +114,18 @@ If you use ImmunoStruct in your research, please cite our paper:
 
 BibTeX:
 ```bibtex
-@article{givechian2025immunostruct,
+@article{givechian2026immunostruct,
   title={ImmunoStruct enables multimodal deep learning for immunogenicity prediction},
   author={Givechian, Kevin Bijan and Rocha, Jo{\~a}o Felipe and Liu, Chen and Yang, Edward and Tyagi, Sidharth and Greene, Kerrie and Ying, Rex and Caron, Etienne and Iwasaki, Akiko and Krishnaswamy, Smita},
   journal={Nature Machine Intelligence},
+  volume={8},
   pages={70--83},
-  year={2025},
+  year={2026},
   publisher={Nature Publishing Group UK London}
 }
 ```
 Nature format:<br>
-Givechian, K.B., Rocha, J.F., Liu, C. et al. ImmunoStruct enables multimodal deep learning for immunogenicity prediction. *Nat Mach Intell* (2025). https://doi.org/10.1038/s42256-025-01163-y
+Givechian, K.B., Rocha, J.F., Liu, C. et al. ImmunoStruct enables multimodal deep learning for immunogenicity prediction. *Nat Mach Intell* 8, 70–83 (2026). https://doi.org/10.1038/s42256-025-01163-y
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
