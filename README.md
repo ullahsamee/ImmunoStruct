@@ -185,7 +185,14 @@ Before installation, ensure you have:
    python -m pip install torch-scatter==2.1.2+pt21cu118 torch-sparse==0.6.18+pt21cu118 torch-cluster==1.6.3+pt21cu118 torch-spline-conv==1.2.2+pt21cu118 torch_geometric==2.5.3 numpy==1.26.3 -f https://data.pyg.org/whl/torch-2.1.2+cu118.html
    ```
 
-7. **Install additional packages**
+7. **Install folding-related packages**
+   ```sh
+   python -m pip install "alphafold @ git+https://github.com/deepmind/alphafold.git"
+   python -m pip install "colabfold"
+   python -m pip install "jax==0.4.23" "jaxlib==0.4.23" "dm-haiku==0.0.10"
+   ```
+
+8. **Install additional packages**
    ```sh
    python -m pip install graphein[extras]
    python -m pip install lifelines
@@ -193,7 +200,7 @@ Before installation, ensure you have:
    python -m pip install multiscale-phate
    ```
 
-8. **Set up environment variables (if needed)**
+9. **Set up environment variables (if needed)**
    ```sh
    export LD_LIBRARY_PATH=/path/to/conda/envs/immuno/lib:$LD_LIBRARY_PATH
    ```
@@ -218,9 +225,15 @@ Place the following files in the `data/` folder:
 
 These PyG graph files can be generated using the below command from the corresponding AlphaFold folders.
 ```sh
-cs immunostruct/preprocessing
-python step1_sequence_to_pdb.py
-python step2_pdb_to_graph.py
+# Download colabfold and remember where it is downloaded to.
+python -m colabfold.download
+
+# Run the protein folding script.
+cd immunostruct/preprocessing
+python step1_sequence_to_pdb.py --input-csv ../../data/ImmunoStruct_clinical_data.csv --start 0 --end 5 --params-loc /gpfs/radev/home/cl2482/.cache/colabfold --peptide-col-index 1 --sequence-col-index 4
+
+# Run the PDB-to-PyG conversion script.
+python step2_pdb_to_pyg.py
 ```
 
 
