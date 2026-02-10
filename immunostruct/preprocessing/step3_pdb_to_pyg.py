@@ -17,14 +17,13 @@ from graphein.protein.graphs import read_pdb_to_dataframe
 
 ROOT_DIR = '/'.join(os.path.realpath(__file__).split('/')[:-3])
 
-def mask_sequence(seq_one_hot, percentage=10):
-    # incase we want to mask, but for now we can set this to 0
+def mask_sequence(seq_one_hot, percentage: float = 10):
     total_len = len(seq_one_hot)
     mask_len = int(total_len * percentage / 100)
 
     mask_indices = random.sample(range(total_len), mask_len)
 
-    masked_seq = seq_one_hot.clone()  # Create a copy of the original sequence
+    masked_seq = seq_one_hot.clone()
     for idx in mask_indices:
         masked_seq[idx] = torch.tensor(enc_dict['MASK'])
 
@@ -58,7 +57,7 @@ if __name__ == '__main__':
 
     config.dict()
 
-    # Graphein does not appear to encode the peptide sequence uniquely, redefine an encoding sequence
+    # Graphein does not appear to encode the peptide sequence uniquely, redefine an encoding sequence.
     enc_dict = {
         'GLY': [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         'SER': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
@@ -83,9 +82,7 @@ if __name__ == '__main__':
         'MASK': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
 
-    pygs = []
-    g2s = []
-    peptide_order_list = []
+    pygs, g2s, peptide_order_list = [], [], []
     convertor = GraphFormatConvertor(src_format = 'nx', dst_format = 'pyg')
     file_list = sorted(glob(os.path.join(args.input_dir, '*.pdb')))
     for filename in file_list:
@@ -94,54 +91,57 @@ if __name__ == '__main__':
             save_filename = os.path.join(args.output_dir, filename_no_extension + '.pt')
 
             g = construct_graph(config = config, path = filename)
+
             # First 179 residues are the extracellular domain of the MHC. 273 and beyond are the peptide.
             g2 = extract_subgraph_by_sequence_position(g, list(range(1, 180)) + list(range(273, 1000)))
             g_pyg = convertor(g2)
 
-            #READ IN PDBS FOR TROUBLE SHOOTING
             tdf = read_pdb_to_dataframe(filename)
 
+            # Chain A is the MHC.
             tdfa = tdf[tdf['chain_id'] == 'A']
             tdfa = tdfa.drop_duplicates('residue_number')
             tdfa = tdfa[:179]
             sequence_a = tdfa['residue_name'].tolist()
 
+            # Chain B is the peptide.
             tdfb = tdf[tdf['chain_id'] == 'B']
             tdfb = tdfb.drop_duplicates('residue_number')
             sequence_b = tdfb['residue_name'].tolist()
-            import pdb; pdb.set_trace()
 
-            #add node features to each graph here
+            # Add node features to each graph.
             n_hdonors = torch.tensor([d['hbond_donors'] for n, d in g2.nodes(data=True)])
             n_hacceptors = torch.tensor([d['hbond_acceptors'] for n, d in g2.nodes(data=True)])
             #aa_one_hot = torch.tensor([d['amino_acid_one_hot'] for n, d in g2.nodes(data=True)])
             #gphein_seq_a = torch.tensor([d['amino_acid_one_hot'] for n, d in g2a.nodes(data=True)])
             #gphein_seq_b = torch.tensor([d['amino_acid_one_hot'] for n, d in g2b.nodes(data=True)])
 
-            #amino acid one-hot encoding
+            # Amino acid one-hot encoding.
             aa_one_hot_a = torch.tensor([enc_dict[x] for x in sequence_a])
             aa_one_hot_b = torch.tensor([enc_dict[x] for x in sequence_b])
 
-            # Apply masking with a X% chance of masking each amino acid (applied only to peptide, increase percentage argument (eg, to 50) to mask %50 of the peptide)
+            # Apply masking with a X% chance of masking each amino acid
+            # (applied only to peptide, increase percentage argument (eg, to 50) to mask 50% of the peptide)
             masked_aa_one_hot_b = mask_sequence(aa_one_hot_b, percentage=0)
             aa_one_hot = torch.cat([aa_one_hot_a, masked_aa_one_hot_b], dim=0)
 
             g2s.append(g2)
 
-            # Use the masked amino acid one-hot encoding as node features, along with number of H-donors/acceptors
+            # Use the masked amino acid one-hot encoding as node features, along with number of H-donors/acceptors.
             node_feats = torch.cat([aa_one_hot, n_hdonors, n_hacceptors], dim=1)
             g_pyg.x = node_feats
 
             pygs.append(g_pyg)
 
-            # Save the PyTorch graph to a file if desired
+            # Save the PyTorch graph to a file if desired.
             torch.save(g_pyg, save_filename)
 
             print('done creating graph {}'.format(filename_no_extension))
 
-            # Delete temporary variables to free memory
+            # Delete temporary variables to free memory.
             del g, g2, g_pyg
-            gc.collect()  # Explicitly call garbage collecto
+            # Explicitly call garbage collector.
+            gc.collect()
 
         except Exception as e:
             log_message = 'Error creating graph {}. Encountered exception {}'.format(filename_no_extension, e)
