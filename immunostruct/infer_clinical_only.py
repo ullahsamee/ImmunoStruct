@@ -3,7 +3,7 @@ import argparse
 import torch
 from dgl.dataloading import GraphDataLoader
 
-from data import collate, SplitDataset, ClinicalDataset
+from data_loading import collate, SplitDataset, ClinicalDataset
 from models.mapping import model_map
 from utils import seed_everything, update_paths
 from procedures import inference_clinical_only

@@ -4,7 +4,7 @@ import torch
 import wandb
 from dgl.dataloading import GraphDataLoader
 
-from data import ImmunoPredDatasetComparative, collate, SplitDataset, collate_amino_acid, ClinicalDataset, ExtendedDataset
+from data_loading import ImmunoPredDatasetComparative, collate, SplitDataset, collate_amino_acid, ClinicalDataset, ExtendedDataset
 from models.mapping import model_map
 from utils import Losses, seed_everything, LinearWarmupCosineAnnealingLR, update_paths
 from procedures import inference_comparative_SSL, inference_comparative, train_model_comparative_SSL, train_model_comparative

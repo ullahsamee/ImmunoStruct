@@ -4,7 +4,7 @@ import torch
 import numpy as np
 from dgl.dataloading import GraphDataLoader
 
-from data import ImmunoPredInferDataset, collate, SplitDataset, ImmunoPredInferDatasetComparative
+from data_loading import ImmunoPredInferDataset, collate, SplitDataset, ImmunoPredInferDatasetComparative
 from models.mapping import model_map
 from utils import seed_everything, update_paths
 from procedures import inference, inference_comparative

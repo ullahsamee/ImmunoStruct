@@ -4,7 +4,7 @@ import torch
 import wandb
 from dgl.dataloading import GraphDataLoader
 
-from data import ImmunoPredDataset, collate, SplitDataset, collate_amino_acid
+from data_loading import ImmunoPredDataset, collate, SplitDataset, collate_amino_acid
 from models.mapping import model_map
 from utils import Losses, seed_everything, update_paths
 from procedures import inference, train_model, inference_SSL, train_model_SSL

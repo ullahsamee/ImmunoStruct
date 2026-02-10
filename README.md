@@ -229,8 +229,11 @@ Place the following files in the `data/` folder:
 
 **Generate PyG graph files:**
 
-These PyG graph files can be generated using the below command from the corresponding AlphaFold folders.
+We have provided the PyG graphs on huggingface, so you just need to download them and put them under `data` folder.
+
+Just FYI, they are generated using a three-step process under `immunostruct/preprocessing`. They are available in case you ever need to run some or all of these procedures.
 ```sh
+# Step 1. AlphaFold2 (sequences in csv files to structures in PDB files).
 # Download colabfold and remember where it is downloaded to.
 python -m colabfold.download
 
@@ -238,8 +241,11 @@ python -m colabfold.download
 cd immunostruct/preprocessing
 python step1_sequence_to_pdb.py --input-csv ../../data/ImmunoStruct_clinical_data.csv --start 0 --end 5 --params-loc /gpfs/radev/home/cl2482/.cache/colabfold --peptide-col-index 1 --sequence-col-index 4
 
-# Run the PDB-to-PyG conversion script.
-python step2_pdb_to_pyg.py
+# Step 2. Moving and renaming the structure data in PDB files.
+python step2_rename_pdb.py
+
+# Step 3. Generating PyG graphs (structures in PDB files to structures in PyTorch .pt files).
+python step3_pdb_to_pyg.py
 ```
 
 
@@ -293,7 +299,9 @@ ImportError: $some_path/libstdc++.so.6: version 'GLIBCXX_3.4.29' not found
 ```
 **Solution:** Add your conda environment path to `LD_LIBRARY_PATH`:
 ```sh
-export LD_LIBRARY_PATH=/path/to/conda/envs/immuno/lib:$LD_LIBRARY_PATH
+conda activate immuno
+echo $CONDA_PREFIX
+export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 ```
 
 **CUDA Compatibility Issues**
