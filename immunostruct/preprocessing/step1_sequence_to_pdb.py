@@ -63,6 +63,7 @@ def main(args):
     folding_input_df = pd.read_csv(args.input_csv)
     folding_input_df = folding_input_df.sort_values(by=[args.allele_col_name, args.peptide_col_name])
     print("Running these samples: " +  str(args.start) + " to " + str(args.end) + " of " + str(len(folding_input_df)))
+
     for row_idx, row in tqdm(folding_input_df.iterrows(), total=len(folding_input_df)):
         if row_idx < args.start or row_idx > args.end:
             continue
