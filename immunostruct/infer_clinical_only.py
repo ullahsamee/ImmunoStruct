@@ -36,7 +36,7 @@ if __name__ == "__main__":
     parser.add_argument("--seed", default=1, type=int)
 
     # Data paths
-    parser.add_argument("--graph-dir", default="$ROOT/data/graph_pyg/", type=str)
+    parser.add_argument("--graph-dir", default="$ROOT/data/graph_pyg_clinical/", type=str)
     parser.add_argument("--seq-path", default="$ROOT/data/ImmunoStruct_clinical_data.csv", type=str)
 
     # Save paths

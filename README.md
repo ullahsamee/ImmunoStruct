@@ -218,7 +218,7 @@ Before installation, ensure you have:
 
 ### Data Preparation
 
-Place the following files in the `data/` folder:
+1. Make sure the following files are in the `data` folder:
 - `ImmunoStruct_IEDB_data.csv`
 - `ImmunoStruct_CEDAR_data_cancer.csv`
 - `ImmunoStruct_CEDAR_data_wildtype.csv`
@@ -226,6 +226,17 @@ Place the following files in the `data/` folder:
 - `ImmunoStruct_clinical_data_survival.csv`
 - `HLA_allele_sequences.csv`
 
+2. Download the following folders from huggingface and place them in the `data` folder:
+- `graph_pyg_IEDB`
+- `graph_pyg_CEDAR_cancer`
+- `graph_pyg_CEDAR_wildtype`
+- `graph_pyg_clinical`
+
+3. If you want to have your own graph-building logic, you can alternatively download the raw PDB graph structure files produced by AlphaFold2 from huggingface.
+- `alphafold2_pdb_IEDB`
+- `alphafold2_pdb_CEDAR_cancer`
+- `alphafold2_pdb_CEDAR_wildtype`
+- `alphafold2_pdb_clinical`
 
 **Generate PyG graph files:**
 
@@ -234,18 +245,77 @@ We have provided the PyG graphs on huggingface, so you just need to download the
 Just FYI, they are generated using a three-step process under `immunostruct/preprocessing`. They are available in case you ever need to run some or all of these procedures.
 ```sh
 # Step 1. AlphaFold2 (sequences in csv files to structures in PDB files).
-# Download colabfold and remember where it is downloaded to.
+# Download colabfold and REMEMBER where it is downloaded to.
 python -m colabfold.download
 
 # Run the protein folding script.
+# start/end help run multiple jobs in parallel.
 cd immunostruct/preprocessing
-python step1_sequence_to_pdb.py --input-csv ../../data/ImmunoStruct_clinical_data.csv --start 0 --end 5 --params-loc /gpfs/radev/home/cl2482/.cache/colabfold --peptide-col-index 1 --sequence-col-index 4
+python step1_sequence_to_pdb.py \
+    --input-csv ../../data/ImmunoStruct_IEDB_data.csv \
+    --output-dir ../../data/pdb_files/IEDB/ \
+    --start 0 --end 24540 \
+    --params-loc /path/to/colabfold \
+    --allele-col-name allele \
+    --peptide-col-name peptide
+
+python step1_sequence_to_pdb.py \
+    --input-csv ../../data/ImmunoStruct_CEDAR_data_cancer.csv \
+    --output-dir ../../data/pdb_files/CEDAR_cancer/ \
+    --start 0 --end 2801 \
+    --params-loc /path/to/colabfold \
+    --allele-col-name allele \
+    --peptide-col-name mut_pep
+
+python step1_sequence_to_pdb.py \
+    --input-csv ../../data/ImmunoStruct_CEDAR_data_wildtype.csv \
+    --output-dir ../../data/pdb_files/CEDAR_wildtype/ \
+    --start 0 --end 2801 \
+    --params-loc /path/to/colabfold \
+    --allele-col-name allele \
+    --peptide-col-name wt_pep
+
+python step1_sequence_to_pdb.py \
+    --input-csv ../../data/ImmunoStruct_clinical_data.csv \
+    --output-dir ../../data/pdb_files/clinical/ \
+    --start 0 --end 29485 \
+    --params-loc /path/to/colabfold \
+    --allele-col-name allele \
+    --peptide-col-name mut_pep
 
 # Step 2. Moving and renaming the structure data in PDB files.
-python step2_rename_pdb.py
+python step2_rename_pdb.py \
+    --input-dir ../../data/pdb_files/IEDB/ \
+    --output-dir ../../data/alphafold2_pdb_IEDB/
+
+python step2_rename_pdb.py \
+    --input-dir ../../data/pdb_files/CEDAR_cancer/ \
+    --output-dir ../../data/alphafold2_pdb_CEDAR_cancer/
+
+python step2_rename_pdb.py \
+    --input-dir ../../data/pdb_files/CEDAR_wildtype/ \
+    --output-dir ../../data/alphafold2_pdb_CEDAR_wildtype/
+
+python step2_rename_pdb.py \
+    --input-dir ../../data/pdb_files/clinical/ \
+    --output-dir ../../data/alphafold2_pdb_clinical/
 
 # Step 3. Generating PyG graphs (structures in PDB files to structures in PyTorch .pt files).
-python step3_pdb_to_pyg.py
+python step3_pdb_to_pyg.py \
+    --input-dir ../../data/alphafold2_pdb_IEDB/ \
+    --output-dir ../../data/graph_pyg_IEDB/
+
+python step3_pdb_to_pyg.py \
+    --input-dir ../../data/alphafold2_pdb_CEDAR_cancer/ \
+    --output-dir ../../data/graph_pyg_CEDAR_cancer/
+
+python step3_pdb_to_pyg.py \
+    --input-dir ../../data/alphafold2_pdb_CEDAR_wildtype/ \
+    --output-dir ../../data/graph_pyg_CEDAR_wildtype/
+
+python step3_pdb_to_pyg.py \
+    --input-dir ../../data/alphafold2_pdb_clinical/ \
+    --output-dir ../../data/graph_pyg_clinical/
 ```
 
 

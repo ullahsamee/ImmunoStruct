@@ -32,8 +32,8 @@ if __name__ == "__main__":
 
     # Data paths
     parser.add_argument("--graph-dir-IEDB", default="$ROOT/data/graph_pyg_IEDB/", type=str)
-    parser.add_argument("--graph-dir-cancer", default="$ROOT/data/graph_pyg_Cancer/", type=str)
-    parser.add_argument("--graph-dir-wildtype", default="$ROOT/data/graph_pyg_Cancer_WT/", type=str) # only used for comparative
+    parser.add_argument("--graph-dir-cancer", default="$ROOT/data/graph_pyg_CEDAR_cancer/", type=str)
+    parser.add_argument("--graph-dir-wildtype", default="$ROOT/data/graph_pyg_CEDAR_wildtype/", type=str) # only used for comparative
     parser.add_argument("--property-path-IEDB", default="$ROOT/data/ImmunoStruct_IEDB_data.csv", type=str)
     parser.add_argument("--property-path-cancer", default="$ROOT/data/ImmunoStruct_CEDAR_data_cancer.csv", type=str)
     parser.add_argument("--property-path-wildtype", default="$ROOT/data/ImmunoStruct_CEDAR_data_wildtype.csv", type=str) # only used for comparative
