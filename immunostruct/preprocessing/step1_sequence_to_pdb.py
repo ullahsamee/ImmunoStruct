@@ -85,6 +85,10 @@ def main(args):
         if args.output_dir:
             output_dir = os.path.join(args.output_dir, full_sequence_name)
 
+        if os.path.exists(output_dir) and os.path.exists(os.path.join(output_dir, f"{full_sequence_name}.pdb")):
+            print(f"Skipping {full_sequence_name} because it already exists.")
+            continue
+
         I = cf_af.prep_inputs(full_sequence_folding, full_sequence_name, args.homooligomer, output_dir=output_dir, clean=False)
         mod_I = cf_af.prep_msa(
             I,
