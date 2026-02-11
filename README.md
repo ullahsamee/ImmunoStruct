@@ -219,31 +219,32 @@ Before installation, ensure you have:
 ### Data Preparation
 
 1. Make sure the following files are in the `data` folder:
-- `ImmunoStruct_IEDB_data.csv`
-- `ImmunoStruct_CEDAR_data_cancer.csv`
-- `ImmunoStruct_CEDAR_data_wildtype.csv`
-- `ImmunoStruct_clinical_data.csv`
-- `ImmunoStruct_clinical_data_survival.csv`
-- `HLA_allele_sequences.csv`
+    - `ImmunoStruct_IEDB_data.csv`
+    - `ImmunoStruct_CEDAR_data_cancer.csv`
+    - `ImmunoStruct_CEDAR_data_wildtype.csv`
+    - `ImmunoStruct_clinical_data.csv`
+    - `ImmunoStruct_clinical_data_survival.csv`
+    - `HLA_allele_sequences.csv`
 
 2. Download the following folders from huggingface and place them in the `data` folder:
-- `graph_pyg_IEDB`
-- `graph_pyg_CEDAR_cancer`
-- `graph_pyg_CEDAR_wildtype`
-- `graph_pyg_clinical`
+    - `graph_pyg_IEDB`
+    - `graph_pyg_CEDAR_cancer`
+    - `graph_pyg_CEDAR_wildtype`
+    - `graph_pyg_clinical`
 
-3. If you want to have your own graph-building logic, you can alternatively download the raw PDB graph structure files produced by AlphaFold2 from huggingface.
-- `alphafold2_pdb_IEDB`
-- `alphafold2_pdb_CEDAR_cancer`
-- `alphafold2_pdb_CEDAR_wildtype`
-- `alphafold2_pdb_clinical`
+3. If you want to customize the graph-building logic, you can alternatively download the graph structure PDB files produced by AlphaFold2, which we also made available on huggingface.
+    - `alphafold2_pdb_IEDB`
+    - `alphafold2_pdb_CEDAR_cancer`
+    - `alphafold2_pdb_CEDAR_wildtype`
+    - `alphafold2_pdb_clinical`
 
-**Generate PyG graph files:**
+**PyG graph files**
 
-We have provided the PyG graphs on huggingface, so you just need to download them and put them under `data` folder.
+We have provided the PyTorch Geometric (PyG) graphs on huggingface. You just need to download them and put them under `data` folder.
 
 <details>
-  <summary>How the PyG graphs are generated (optional)</summary>
+  <summary>How the PyG graphs are generated</summary>
+
 
 The PyG graphs are generated using a three-step process under `immunostruct/preprocessing`. The generation scripts are available in case you ever need to run some or all of them.
 ```sh
