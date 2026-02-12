@@ -161,6 +161,9 @@ Before installation, ensure you have:
    ```sh
    conda create --name immuno python=3.8 -c anaconda -c conda-forge -y
    conda activate immuno
+
+   # conda create --name immunostruct python=3.10 -c anaconda -c conda-forge -y
+   # conda activate immunostruct
    ```
 
 3. **Install core dependencies**
@@ -190,6 +193,10 @@ Before installation, ensure you have:
    python -m pip install jax==0.2.25 jaxlib==0.1.69+cuda111 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
    python -m pip install "alphafold-colabfold==2.0.0" "colabfold==1.2.0" "dm-haiku==0.0.4"
    python -m pip install "biopython==1.78"
+
+   # pip install colabfold[alphafold]==1.5.5
+   # pip install jax==0.4.23 jaxlib==0.4.23+cuda11.cudnn86 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+   # conda install -c bioconda mmseqs2 -y
    ```
 
    Go to /path/to/environment/lib/python3.8/site-packages/jaxlib/xla_client.py: change `np.object` to `object`.
@@ -250,6 +257,11 @@ The PyG graphs are generated using a three-step process under `immunostruct/prep
 # Step 1. AlphaFold2 (sequences in csv files to structures in PDB files).
 # Download colabfold and REMEMBER where it is downloaded to.
 python -m colabfold.download
+
+# cd ./colabfold_data/
+# wget https://wwwuser.gwdg.de/~compbiol/colabfold/uniref30_2302.tar.gz
+# tar -xzvf uniref30_2302.tar.gz
+# mmseqs tsv2exprofiledb uniref30_2302 uniref30_2302_db
 
 # Run the protein folding script.
 # start/end help run multiple jobs in parallel.
