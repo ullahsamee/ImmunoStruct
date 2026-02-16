@@ -2,6 +2,8 @@ import argparse
 import os
 import shutil
 
+ROOT_DIR = '/'.join(os.path.realpath(__file__).split('/')[:-3])
+
 
 def _find_single_pdb(folder_path: str) -> str:
     pdb_files = [f for f in os.listdir(folder_path) if f.lower().endswith(".pdb")]
@@ -38,6 +40,6 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Copy and rename PDB files by folder name.")
-    parser.add_argument("--input-dir", required=True, help="Directory containing per-sequence folders.")
-    parser.add_argument("--output-dir", required=True, help="Directory to write renamed PDB files.")
+    parser.add_argument("--input-dir", default=f"{ROOT_DIR}/data/pdb_files/IEDB/", type=str)
+    parser.add_argument("--output-dir", default=f"{ROOT_DIR}/data/alphafold_pdb_IEDB/", type=str)
     main(parser.parse_args())

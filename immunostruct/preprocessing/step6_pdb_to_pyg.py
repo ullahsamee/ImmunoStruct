@@ -17,7 +17,7 @@ from graphein.protein.graphs import read_pdb_to_dataframe
 
 ROOT_DIR = '/'.join(os.path.realpath(__file__).split('/')[:-3])
 
-def mask_sequence(seq_one_hot, percentage: float = 10):
+def mask_sequence(enc_dict, seq_one_hot, percentage: float = 10):
     total_len = len(seq_one_hot)
     mask_len = int(total_len * percentage / 100)
 
@@ -29,12 +29,7 @@ def mask_sequence(seq_one_hot, percentage: float = 10):
 
     return masked_seq
 
-if __name__ == '__main__':
-    import argparse
-    parser = argparse.ArgumentParser(description="Convert AlphaFold PDBs to PyG graphs.")
-    parser.add_argument("--input-dir", default=f"{ROOT_DIR}/data/alphafold_pdb_IEDB/", type=str)
-    parser.add_argument("--output-dir", default=f"{ROOT_DIR}/data/graph_pyg_IEDB/", type=str)
-    args = parser.parse_args()
+def main(args):
 
     os.makedirs(args.output_dir, exist_ok=True)
 
@@ -122,7 +117,7 @@ if __name__ == '__main__':
 
             # Apply masking with a X% chance of masking each amino acid
             # (applied only to peptide, increase percentage argument (eg, to 50) to mask 50% of the peptide)
-            masked_aa_one_hot_b = mask_sequence(aa_one_hot_b, percentage=0)
+            masked_aa_one_hot_b = mask_sequence(enc_dict, aa_one_hot_b, percentage=0)
             aa_one_hot = torch.cat([aa_one_hot_a, masked_aa_one_hot_b], dim=0)
 
             g2s.append(g2)
@@ -150,3 +145,12 @@ if __name__ == '__main__':
             log_file = os.path.join(args.output_dir, "error_log.txt")
             with open(log_file, 'a') as file:
                 file.write(log_message + '\n')
+
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser(description="Convert AlphaFold PDBs to PyG graphs.")
+    parser.add_argument("--input-dir", default=f"{ROOT_DIR}/data/alphafold_pdb_IEDB/", type=str)
+    parser.add_argument("--output-dir", default=f"{ROOT_DIR}/data/graph_pyg_IEDB/", type=str)
+    args = parser.parse_args()
+    main(args)
