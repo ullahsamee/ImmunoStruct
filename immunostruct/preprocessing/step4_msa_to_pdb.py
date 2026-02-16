@@ -139,8 +139,8 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run AlphaFold2 on precomputed MSAs (step 2: MSA → PDB).")
-    parser.add_argument("--input-csv", required=True, help="CSV with sequences and peptides.")
-    parser.add_argument("--output-dir", required=True, help="Base output directory.")
+    parser.add_argument("--input-csv", required=True, help="CSV with all sequences and peptides.")
+    parser.add_argument("--output-dir", required=True, help="Output directory for PDB files.")
     parser.add_argument("--params-loc", required=True, help="Path to AlphaFold2 params directory.")
     parser.add_argument("--start", type=int, default=None, help="Start index (0-based). Process all if not set.")
     parser.add_argument("--end", type=int, default=None, help="End index (0-based, exclusive). Process all if not set.")

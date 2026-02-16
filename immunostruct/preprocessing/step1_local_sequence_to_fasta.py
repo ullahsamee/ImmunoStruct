@@ -62,7 +62,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Write all unique sequences to one FASTA file.")
-    parser.add_argument("--input-csv", required=True, help="CSV with sequences and peptides.")
+    parser.add_argument("--input-csv", required=True, help="CSV with all sequences and peptides.")
     parser.add_argument("--output-fasta", required=True, help="Output FASTA file path for all records.")
     parser.add_argument("--allele-sequence-csv", default=f"{ROOT_DIR}/data/HLA_allele_sequences.csv")
     parser.add_argument("--allele-col-name", type=str, default="allele")

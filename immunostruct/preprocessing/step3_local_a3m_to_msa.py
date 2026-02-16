@@ -153,7 +153,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Convert a3m files to MSA files.")
     parser.add_argument("--input-dir", required=True, help="Input directory for a3m files.")
     parser.add_argument("--output-dir", required=True, help="Output directory for MSA files.")
-    parser.add_argument("--input-csv", required=True, help="CSV with sequences and peptides.")
+    parser.add_argument("--input-csv", required=True, help="CSV with all sequences and peptides.")
     parser.add_argument("--allele-sequence-csv", default=f"{ROOT_DIR}/data/HLA_allele_sequences.csv")
     parser.add_argument("--allele-col-name", type=str, default="allele")
     parser.add_argument("--peptide-col-name", type=str, default="peptide")

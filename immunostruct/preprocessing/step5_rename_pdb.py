@@ -41,5 +41,5 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Copy and rename PDB files by folder name.")
     parser.add_argument("--input-dir", default=f"{ROOT_DIR}/data/pdb_files/IEDB/", type=str)
-    parser.add_argument("--output-dir", default=f"{ROOT_DIR}/data/alphafold_pdb_IEDB/", type=str)
+    parser.add_argument("--output-dir", default=f"{ROOT_DIR}/data/alphafold2_pdb_IEDB/", type=str)
     main(parser.parse_args())

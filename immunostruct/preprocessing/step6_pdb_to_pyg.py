@@ -150,7 +150,7 @@ def main(args):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description="Convert AlphaFold PDBs to PyG graphs.")
-    parser.add_argument("--input-dir", default=f"{ROOT_DIR}/data/alphafold_pdb_IEDB/", type=str)
+    parser.add_argument("--input-dir", default=f"{ROOT_DIR}/data/alphafold2_pdb_IEDB/", type=str)
     parser.add_argument("--output-dir", default=f"{ROOT_DIR}/data/graph_pyg_IEDB/", type=str)
     args = parser.parse_args()
     main(args)

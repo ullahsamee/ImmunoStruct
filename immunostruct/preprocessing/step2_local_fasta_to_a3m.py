@@ -10,7 +10,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Convert FASTA files to a3m files.")
-    parser.add_argument("--input-fasta", required=True, help="FASTA file path for all records.")
+    parser.add_argument("--input-fasta", required=True, help="Input FASTA file path for all records.")
     parser.add_argument("--msa-database-dir", required=True, help="Directory of MSA database containing `colabfold_envdb_202108_db` and `uniref30_2302_db`.")
-    parser.add_argument("--output-dir", required=True, help="Output directory for resulting a3m files.")
+    parser.add_argument("--output-dir", required=True, help="Output directory for a3m files.")
     main(parser.parse_args())
