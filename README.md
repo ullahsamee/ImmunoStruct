@@ -6,7 +6,7 @@
   <h1><img src="assets/ImmunoStruct_cover.png" width="200"><br><code>ImmunoStruct</code></h1>
   <h3>ImmunoStruct enables multimodal deep learning for immunogenicity prediction</h3>
   
-  [![nature](https://img.shields.io/badge/nature-machine_intelligence-white)](https://www.nature.com/articles/s42256-025-01163-y)
+  [![nature](https://img.shields.io/badge/nature-machine_intelligence-gold)](https://www.nature.com/articles/s42256-025-01163-y)
   [![PDF](https://img.shields.io/badge/PDF-DADBDD)](https://www.nature.com/articles/s42256-025-01163-y.pdf)
   ![Python](https://img.shields.io/badge/Python-3.10-3776ab)
   ![PyTorch](https://img.shields.io/badge/PyTorch-2.1.2-ee4c2c)
