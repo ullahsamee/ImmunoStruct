@@ -14,8 +14,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Entry point.")
     # Model parameters
-    parser.add_argument("--model-dir", default="$ROOT/results/")
-    parser.add_argument("--model-filename", default="HybridModel_Comparative-wtds_False-lr_pt_0.001-lr_ft_0.0001-cc_0.01-ssl_False-ep_40-bs_128-fseq_True-seql_False-fs_23-cs_3-seed_1_finetune.pt")
+    parser.add_argument("--model-path", default="$ROOT/results/HybridModel_Comparative-wtds_False-lr_pt_0.001-lr_ft_0.0001-cc_0.01-ssl_False-ep_40-bs_128-fseq_True-seql_False-fs_23-cs_3-seed_1_finetune.pt")
     parser.add_argument("--model", default="HybridModel_Comparative", type=str)
     parser.add_argument("--use-wt-for-downstream", action='store_true')
     parser.add_argument("--gcn-layers", default=5, type=int)
@@ -48,8 +47,7 @@ if __name__ == "__main__":
     update_paths(config)
 
     # Model save paths.
-    model_path = os.path.join(config.model_dir, config.model_filename)
-    print(f'SAVED MODEL PATH: {model_path}')
+    print(f'SAVED MODEL PATH: {config.model_path}')
 
     device = torch.device("cuda" if (torch.cuda.is_available()) else "cpu")
     seed_everything(config.seed)
@@ -70,7 +68,7 @@ if __name__ == "__main__":
         property_embedding_dim=config.property_embedding_dim
     )
 
-    model.load_trained(model_path, new_head=False)
+    model.load_trained(config.model_path, new_head=False, map_location=device)
     model.to(device)
 
     print('Retriving clinical dataset')

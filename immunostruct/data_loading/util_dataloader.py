@@ -4,7 +4,7 @@ from typing import Tuple
 import copy
 import torch
 import numpy as np
-from .immmunopred_dataloader import AMINO_ACIDS, PADDING_CHAR
+from .constants import PADDING_CHAR
 
 __all__ = ["SplitDataset", "ExtendedDataset"]
 
@@ -72,16 +72,16 @@ class SplitDataset:
                 return update_graph, sequence, d[4], d[3], amino_acid
             else:
                 return update_graph, sequence, d[4], d[3], torch.tensor([0])
-            
+
         elif self.return_amino_acid and not self.binary:
             if self.split == "train":
                 return update_graph, sequence, d[5], d[3], amino_acid
             else:
                 return update_graph, sequence, d[5], d[3], torch.tensor([0])
-            
+
         elif not self.return_amino_acid and self.binary:
             return d[0], sequence, d[4], d[3]
-        
+
         else:
             return d[0], sequence, d[5], d[3]
 

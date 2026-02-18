@@ -14,8 +14,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Entry point.")
     # Model parameters
     parser.add_argument("--model", default="StructureModel", type=str)
-    parser.add_argument("--model-dir", default="$ROOT/results/PropIEDB_PropCancer_ImmunoCancer/", type=str)
-    parser.add_argument("--model-filename", default="HybridModel_Comparative-wtds_False-lr_pt_0.001-lr_ft_0.0001-cc_0.01-ssl_False-ep_40-bs_128-fseq_True-seql_False-fs_23-cs_3-seed_1_finetune.pt")
+    parser.add_argument("--model-path", default="$ROOT/results/PropIEDB_PropCancer_ImmunoCancer/HybridModel_Comparative-wtds_False-lr_pt_0.001-lr_ft_0.0001-cc_0.01-ssl_False-ep_40-bs_128-fseq_True-seql_False-fs_23-cs_3-seed_1_finetune.pt", type=str)
     parser.add_argument("--use-wt-for-downstream", action='store_true')
 
     # Dataset parameters
@@ -45,8 +44,7 @@ if __name__ == "__main__":
     update_paths(config)
 
     # Model save paths.
-    model_path = os.path.join(config.model_dir, config.model_filename)
-    print(f'SAVED MODEL PATH: {model_path}')
+    print(f'SAVED MODEL PATH: {config.model_path}')
 
     device = torch.device("cuda" if (torch.cuda.is_available()) else "cpu")
     seed_everything(config.seed)
@@ -56,7 +54,7 @@ if __name__ == "__main__":
     # input_dim = sequence length (11 for peptide, 283 for sequence) * embedding
     input_dim = 283 * 21 if config.full_sequence else 11 * 21
     model = model_map[config.model](vae_input_dim=input_dim, device=device, use_wt_for_downstream=config.use_wt_for_downstream)
-    model.load_trained(model_path, new_head=False, map_location=device)
+    model.load_trained(config.model_path, new_head=False, map_location=device)
     model.to(device)
 
     print('Retrieving dataset')
@@ -98,6 +96,6 @@ if __name__ == "__main__":
         test_stats = inference(config, model, test_loader, device, return_raw_preds=True)
 
     sequences = dataset_ft.raw_full_sequence[np.array(test_dataset_ft.indices)]
-    np.savetxt(f"{config.model_dir}/predictions_PPI.txt", np.stack([test_stats["predicted_probs"], test_stats["true_targets"], sequences], axis=1),
+    np.savetxt(f"{os.path.dirname(config.model_path)}/predictions_PPI.txt", np.stack([test_stats["predicted_probs"], test_stats["true_targets"], sequences], axis=1),
                delimiter="\t", fmt="%s", header="Predicted Immunogenicity\tTrue Immunogenicity\tSequence", comments="")
     print('DONE')

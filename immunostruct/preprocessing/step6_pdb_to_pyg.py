@@ -3,6 +3,7 @@ import random
 import gc
 import os
 from glob import glob
+from tqdm import tqdm
 
 from graphein.ml.conversion import GraphFormatConvertor
 from graphein.protein.config import ProteinGraphConfig
@@ -80,7 +81,8 @@ def main(args):
     pygs, g2s, peptide_order_list = [], [], []
     convertor = GraphFormatConvertor(src_format = 'nx', dst_format = 'pyg')
     file_list = sorted(glob(os.path.join(args.input_dir, '*.pdb')))
-    for filename in file_list:
+    print(f"Converting {len(file_list)} PDB files to PyG graphs...")
+    for filename in tqdm(file_list):
         try:
             filename_no_extension = os.path.basename(filename).replace('.pdb', '')
             save_filename = os.path.join(args.output_dir, filename_no_extension + '.pt')

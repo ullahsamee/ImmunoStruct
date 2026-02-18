@@ -5,8 +5,8 @@ import pandas as pd
 from collections import Counter
 from .preprocess import preprocess_graphs, preprocess_graph, preprocess_sequence, preprocess_sequence_graph, preprocess_properties, preprocess_hla
 from .preprocess import preprocess_properties_cancer_wt, preprocess_sequence_graph_cancer_wt, preprocess_sequence_graph_clinical
-from .utils import RandomRotation, duplicate_check, RandomRotation
-from .immmunopred_dataloader import AMINO_ACIDS, PADDING_CHAR
+from .data_utils import RandomRotation, duplicate_check, RandomRotation
+from .constants import AMINO_ACIDS, PADDING_CHAR
 
 __all__ = ["ImmunoPredInferDataset", "ImmunoPredInferDatasetComparative", "ClinicalDataset"]
 
@@ -19,50 +19,48 @@ class ImmunoPredInferDataset(Dataset):
         self.hla_path = hla_path
 
         graphs = preprocess_graphs(graph_directory)
-        f_dict, fp2_dict, new_imm_dict, expanded_pep_pair = preprocess_properties(property_path, True if "Cancer" in graph_directory else False)
-        name_mapper = preprocess_hla(expanded_pep_pair, hla_path)
-        name_mapper, graph_mapper = preprocess_sequence_graph(name_mapper, graphs, new_imm_dict, f_dict)
+        foreignness_dict, biochem_property_dict, immunogenicity_dict, mhc_pep_pair_list = preprocess_properties(property_path, True if "Cancer" in graph_directory else False)
+        name_mapper = preprocess_hla(mhc_pep_pair_list, hla_path)
+        name_mapper, graph_mapper = preprocess_sequence_graph(name_mapper, graphs, immunogenicity_dict, foreignness_dict)
         graph_mapper = preprocess_graph(graph_mapper, config.feature_size, config.coord_size)
         encoded_full_sequence_map, encoded_peptide_map = preprocess_sequence(name_mapper, AMINO_ACIDS, PADDING_CHAR)
 
-        self.organize(name_mapper, encoded_full_sequence_map, encoded_peptide_map, fp2_dict, new_imm_dict, f_dict, graph_mapper)
+        self.organize(name_mapper, encoded_full_sequence_map, encoded_peptide_map, biochem_property_dict, immunogenicity_dict, foreignness_dict, graph_mapper)
         self.normalize()
 
-    def organize(self, name_mapper, encoded_full_sequence_map, encoded_peptide_map, fp2_dict, new_imm_dict, f_dict, graph_mapper):
-        names = [(x, a, b, c) for x, (a, b, c) in name_mapper.items()]
+    def organize(self, name_mapper, encoded_full_sequence_map, encoded_peptide_map, biochem_property_dict, immunogenicity_dict, foreignness_dict, graph_mapper):
+        key_fullseq_list = [(key, mhc_seq + pep_seq) for key, (pep_seq, mhc_seq) in name_mapper.items()]
 
-        raw_full_sequence = [x[1] for x in names]
-        encoded_full_sequence = [encoded_full_sequence_map[x[0]] for x in names]
-        encoded_peptide_sequence = [encoded_peptide_map[x[0]] for x in names]
+        raw_full_sequence = [full_seq for _, full_seq in key_fullseq_list]
+        encoded_full_sequence = [encoded_full_sequence_map[key] for key, _ in key_fullseq_list]
+        encoded_peptide_sequence = [encoded_peptide_map[key] for key, _ in key_fullseq_list]
 
-        protein_reg_values = [fp2_dict[x[0]] for x in names]
-        protein_immuno_values = [new_imm_dict[x[0]] for x in names]
+        biochem_property_values = [biochem_property_dict[key] for key, _ in key_fullseq_list]
+        immunogenicity_values = [immunogenicity_dict[key] for key, _ in key_fullseq_list]
 
-        class_weights = Counter(protein_immuno_values)
+        class_weights = Counter(immunogenicity_values)
         self.class_weights = class_weights
-        print(class_weights)
 
-        protein_reg_values_f = [f_dict[x[0]] for x in names]
+        foreignness_values = [foreignness_dict[key] for key, _ in key_fullseq_list]
+        dgl_filtered_graphs = [graph_mapper[key] for key, _ in key_fullseq_list]
 
-        dgl_filtered_graphs = [graph_mapper[x[2]] for x in names]
-
-        duplicate_check(encoded_full_sequence, protein_reg_values, dgl_filtered_graphs)
+        duplicate_check(encoded_full_sequence, biochem_property_values, dgl_filtered_graphs)
 
         self.raw_full_sequence = np.array(raw_full_sequence)
         self.encoded_full_sequence = torch.tensor(np.array(encoded_full_sequence), dtype=torch.float32)
         self.encoded_peptide_sequence = torch.tensor(np.array(encoded_peptide_sequence), dtype=torch.float32)
-        self.regression_values = torch.tensor(np.array(protein_reg_values), dtype=torch.float32)
-        self.binary_values = torch.tensor(np.array(protein_immuno_values), dtype=torch.float32)
-        self.regression_values_f = torch.tensor(np.array(protein_reg_values_f), dtype=torch.float32)
+        self.biochem_property = torch.tensor(np.array(biochem_property_values), dtype=torch.float32)
+        self.immunogenicity = torch.tensor(np.array(immunogenicity_values), dtype=torch.float32)
+        self.foreignness = torch.tensor(np.array(foreignness_values), dtype=torch.float32)
 
         self.graphs = dgl_filtered_graphs
 
         print("Preprocess Complete")
 
     def normalize(self):
-        self.min = torch.min(self.regression_values_f)
-        self.max = torch.max(self.regression_values_f)
-        self.regression_values_f = 2 * (self.regression_values_f - (self.max+self.min)/2)/(self.max-self.min)
+        self.min = torch.min(self.foreignness)
+        self.max = torch.max(self.foreignness)
+        self.foreignness = 2 * (self.foreignness - (self.max+self.min)/2)/(self.max-self.min)
 
     def denormalize(self, output):
         return output / 2 * (self.max - self.min) + (self.max+self.min)/2
@@ -74,7 +72,8 @@ class ImmunoPredInferDataset(Dataset):
         return len(self.graphs)
 
     def __getitem__(self, idx):
-        return self.graphs[idx], self.encoded_full_sequence[idx], self.encoded_peptide_sequence[idx], self.regression_values[idx], self.binary_values[idx], self.regression_values_f[idx]
+        return (self.graphs[idx], self.encoded_full_sequence[idx], self.encoded_peptide_sequence[idx],
+                self.biochem_property[idx], self.immunogenicity[idx], self.foreignness[idx])
 
 class ImmunoPredInferDatasetComparative(Dataset):
     def __init__(self, config, graph_directory_cancer, graph_directory_wt, property_path_cancer, property_path_wt, hla_path):
@@ -89,8 +88,8 @@ class ImmunoPredInferDatasetComparative(Dataset):
         graphs_cancer = preprocess_graphs(graph_directory_cancer)
         graphs_wt = preprocess_graphs(graph_directory_wt)
         self.combined_df = preprocess_properties_cancer_wt(property_path_cancer, property_path_wt)
-        name_mapper_cancer = preprocess_hla(self.combined_df['pep_pair_cancer'], hla_path)
-        name_mapper_wt = preprocess_hla(self.combined_df['pep_pair_wt'], hla_path)
+        name_mapper_cancer = preprocess_hla(self.combined_df['mhc_pep_pair_cancer'], hla_path)
+        name_mapper_wt = preprocess_hla(self.combined_df['mhc_pep_pair_wt'], hla_path)
 
         self.combined_df, name_mapper_cancer, name_mapper_wt, graph_mapper_cancer, graph_mapper_wt = preprocess_sequence_graph_cancer_wt(
             self.combined_df, name_mapper_cancer, name_mapper_wt, graphs_cancer, graphs_wt)
@@ -117,27 +116,26 @@ class ImmunoPredInferDatasetComparative(Dataset):
         peptide_property_wt, immunogenicity_wt, foreignness_wt = [], [], []
         dgl_graphs_cancer, dgl_graphs_wt = [], []
 
-        names = [(x, a, b, c) for x, (a, b, c) in name_mapper_cancer.items()]
-
-        raw_full_sequence = [x[1] for x in names]
+        key_fullseq_list = [(key, mhc_seq + pep_seq) for key, (pep_seq, mhc_seq) in name_mapper_cancer.items()]
+        raw_full_sequence = [full_seq for _, full_seq in key_fullseq_list]
 
         for _, df_entry in self.combined_df.iterrows():
-            pep_pair_cancer = df_entry['pep_pair_cancer']
-            pep_pair_wt = df_entry['pep_pair_wt']
+            mhc_pep_pair_cancer = df_entry['mhc_pep_pair_cancer']
+            mhc_pep_pair_wt = df_entry['mhc_pep_pair_wt']
 
-            encoded_full_seq_cancer.append(encoded_full_sequence_map_cancer[pep_pair_cancer])
-            encoded_peptide_seq_cancer.append(encoded_peptide_map_cancer[pep_pair_cancer])
+            encoded_full_seq_cancer.append(encoded_full_sequence_map_cancer[mhc_pep_pair_cancer])
+            encoded_peptide_seq_cancer.append(encoded_peptide_map_cancer[mhc_pep_pair_cancer])
             peptide_property_cancer.append(tuple(df_entry[['Mprop1', 'Mprop2']].to_numpy().tolist()))
             immunogenicity_cancer.append(df_entry['immunogenicity'])
             foreignness_cancer.append(df_entry['smoothed_foreign'])
-            dgl_graphs_cancer.append(graph_mapper_cancer[name_mapper_cancer[pep_pair_cancer][1]])
+            dgl_graphs_cancer.append(graph_mapper_cancer[mhc_pep_pair_cancer])
 
-            encoded_full_seq_wt.append(encoded_full_sequence_map_wt[pep_pair_wt])
-            encoded_peptide_seq_wt.append(encoded_peptide_map_wt[pep_pair_wt])
+            encoded_full_seq_wt.append(encoded_full_sequence_map_wt[mhc_pep_pair_wt])
+            encoded_peptide_seq_wt.append(encoded_peptide_map_wt[mhc_pep_pair_wt])
             peptide_property_wt.append(tuple(df_entry[['Mprop1_wt', 'Mprop2_wt']].to_numpy().tolist()))
             immunogenicity_wt.append(0)
             foreignness_wt.append(self.combined_df['smoothed_foreign'].min())
-            dgl_graphs_wt.append(graph_mapper_wt[name_mapper_wt[pep_pair_wt][1]])
+            dgl_graphs_wt.append(graph_mapper_wt[mhc_pep_pair_wt])
 
         duplicate_check(encoded_full_seq_cancer, peptide_property_cancer, dgl_graphs_cancer)
         duplicate_check(encoded_full_seq_wt, peptide_property_wt, dgl_graphs_wt)
@@ -195,27 +193,27 @@ class ClinicalDataset(Dataset):
         self.organize(name_mapper, encoded_full_sequence_map, encoded_peptide_map, graph_mapper)
 
     def organize(self, name_mapper, encoded_full_sequence_map, encoded_peptide_map, graph_mapper):
-
         encoded_full_seq, encoded_peptide_seq, peptide_property, dgl_graphs = [], [], [], []
 
         seq_df = pd.read_csv(self.seq_path)
 
         first_valid_pep_pair = None
         for _, df_entry in seq_df.iterrows():
-            pep_pair = df_entry['combo']
-            if pep_pair in name_mapper.keys():
-                first_valid_pep_pair = pep_pair
+            import pdb; pdb.set_trace()
+            mhc_pep_pair = df_entry['combo']
+            if mhc_pep_pair in name_mapper.keys():
+                first_valid_pep_pair = mhc_pep_pair
                 break
 
         for _, df_entry in seq_df.iterrows():
-            pep_pair = df_entry['combo']
+            mhc_pep_pair = df_entry['combo']
 
-            if pep_pair in name_mapper.keys():
-                encoded_full_seq.append(encoded_full_sequence_map[pep_pair])
-                encoded_peptide_seq.append(encoded_peptide_map[pep_pair])
+            if mhc_pep_pair in name_mapper.keys():
+                encoded_full_seq.append(encoded_full_sequence_map[mhc_pep_pair])
+                encoded_peptide_seq.append(encoded_peptide_map[mhc_pep_pair])
                 # NOTE: currently a hack because these values are not avaliable yet.
                 peptide_property.append([0.4, 0.4])
-                dgl_graphs.append(graph_mapper[name_mapper[pep_pair][1]])
+                dgl_graphs.append(graph_mapper[name_mapper[mhc_pep_pair][1]])
 
             else:
                 encoded_full_seq.append(np.ones_like(encoded_full_sequence_map[first_valid_pep_pair]) * np.nan)

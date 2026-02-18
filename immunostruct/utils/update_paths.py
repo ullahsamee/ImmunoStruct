@@ -8,9 +8,9 @@ def update_paths(config):
     current_platform = platform.system()
 
     if current_platform == 'Windows':
-        ROOT_DIR = "\\".join(os.path.realpath(__file__).split("\\")[:-2])
+        ROOT_DIR = "\\".join(os.path.realpath(__file__).split("\\")[:-3])
     elif current_platform == 'Linux':
-        ROOT_DIR = "/".join(os.path.realpath(__file__).split("/")[:-2])
+        ROOT_DIR = "/".join(os.path.realpath(__file__).split("/")[:-3])
     else:
         raise NotImplementedError(f"Unsupported platform: {current_platform}")
 

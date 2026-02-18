@@ -556,10 +556,10 @@ The PyG graphs are generated using a three-step process under `immunostruct/prep
    python train_IEDB_wFT.py --full-sequence --model HybridModelv2 --wandb-username immunoteam --sequence-loss --seed 1
 
    # Cancer training
-   python infer_IEDB_or_Cancer.py --model HybridModelv2_Comparative --full-sequence --infer_dataset Cancer --comparative --use-wt-for-downstream --seed 1
+   python train_Cancer_wFT.py --model HybridModelv2_Comparative --full-sequence --infer_dataset Cancer --comparative --use-wt-for-downstream --seed 1
 
    # IEDB or Cancer inference
-   python infer_IEDB_or_Cancer.py --model HybridModelv2 --model-dir /path/to/model --model-filename MODEL_FILENAME --full-sequence --infer_dataset IEDB
+   python infer_IEDB_or_Cancer.py --model HybridModelv2 --model-path /path/to/model --full-sequence --infer_dataset IEDB
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
