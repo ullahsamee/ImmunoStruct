@@ -530,37 +530,49 @@ The PyG graphs are generated using a three-step process under `immunostruct/prep
 2. **Run Experiments**
 
     NOTE: these are already deprecated. See `immunostruct/old_scripts`.
-   ```sh
-   # HybridModelv2 with full sequence and sequence loss
-   python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model HybridModelv2 --wandb-username YOUR_WANDB_USERNAME
+    ```sh
+    # Sequence + structure + biochemical property + multimodal multihead attention
+    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model HybridModelv2 --wandb-username YOUR_WANDB_USERNAME
 
-   # HybridModel with full sequence and sequence loss
-   python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model HybridModel --wandb-username YOUR_WANDB_USERNAME
+    # Sequence + structure + biochemical property
+    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model HybridModel --wandb-username YOUR_WANDB_USERNAME
 
-   # Sequence with fingerprint model
-   python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model SequenceFpModel --wandb-username YOUR_WANDB_USERNAME
+    # Sequence + biochemical property
+    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model SequenceFpModel --wandb-username YOUR_WANDB_USERNAME
 
-   # Sequence-only model
-   python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model SequenceModel --wandb-username YOUR_WANDB_USERNAME
+    # Sequence-only model
+    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model SequenceModel --wandb-username YOUR_WANDB_USERNAME
 
-   # Structure-only model
-   python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --model StructureModel --wandb-username YOUR_WANDB_USERNAME
-   ```
+    # Structure-only model
+    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --model StructureModel --wandb-username YOUR_WANDB_USERNAME
+    ```
 
 3. **Our main experiments**
 
     These are examples for running the training and inference.
 
-   ```sh
-   # IEDB training
-   python train_IEDB_wFT.py --full-sequence --model HybridModelv2 --wandb-username immunoteam --sequence-loss --seed 1
+    ```sh
+    # IEDB training
+    python train_IEDB_wFT.py --full-sequence --model HybridModelv2 --sequence-loss --seed 1 --wandb-username immunoteam
 
-   # Cancer training
-   python train_Cancer_wFT.py --model HybridModelv2_Comparative --full-sequence --infer_dataset Cancer --comparative --use-wt-for-downstream --seed 1
+    # CEDAR training
+    python train_Cancer_wFT.py --model HybridModelv2_Comparative --sequence-loss --full-sequence --infer_dataset Cancer --comparative --use-wt-for-downstream --seed 1 --wandb-username immunoteam
 
-   # IEDB or Cancer inference
-   python infer_IEDB_or_Cancer.py --model HybridModelv2 --model-path /path/to/model --full-sequence --infer_dataset IEDB
-   ```
+    # IEDB or CEDAR inference
+    python infer_IEDB_or_Cancer.py --model HybridModelv2 --model-path /path/to/model --full-sequence --infer_dataset IEDB --wandb-username immunoteam
+    ```
+
+    For running inference using the models we provide:
+    ```sh
+    # IEDB inference
+    python infer_IEDB_or_Cancer.py --model HybridModelv2 --model-path ../results/IEDB_model.pt --full-sequence --infer_dataset IEDB
+
+    # CEDAR inference
+    python infer_IEDB_or_Cancer.py --model HybridModel_Comparative --model-path ../results/CEDAR_model.pt --full-sequence --infer_dataset Cancer
+
+    # Clinical inference
+    python infer_clinical_only.py --model HybridModel_Comparative --model-path ../results/CEDAR_model.pt --full-sequence
+    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

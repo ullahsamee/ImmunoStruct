@@ -78,7 +78,6 @@ def main(args):
         'MASK': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
 
-    pygs, g2s, peptide_order_list = [], [], []
     convertor = GraphFormatConvertor(src_format = 'nx', dst_format = 'pyg')
     file_list = sorted(glob(os.path.join(args.input_dir, '*.pdb')))
     print(f"Converting {len(file_list)} PDB files to PyG graphs...")
@@ -86,6 +85,9 @@ def main(args):
         try:
             filename_no_extension = os.path.basename(filename).replace('.pdb', '')
             save_filename = os.path.join(args.output_dir, filename_no_extension + '.pt')
+            if os.path.exists(save_filename):
+                print(f"Graph already exists for {filename_no_extension}")
+                continue
 
             g = construct_graph(config = config, path = filename)
 
@@ -122,13 +124,9 @@ def main(args):
             masked_aa_one_hot_b = mask_sequence(enc_dict, aa_one_hot_b, percentage=0)
             aa_one_hot = torch.cat([aa_one_hot_a, masked_aa_one_hot_b], dim=0)
 
-            g2s.append(g2)
-
             # Use the masked amino acid one-hot encoding as node features, along with number of H-donors/acceptors.
             node_feats = torch.cat([aa_one_hot, n_hdonors, n_hacceptors], dim=1)
             g_pyg.x = node_feats
-
-            pygs.append(g_pyg)
 
             # Save the PyTorch graph to a file if desired.
             torch.save(g_pyg, save_filename)
