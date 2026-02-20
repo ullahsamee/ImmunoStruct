@@ -201,7 +201,14 @@ Before installation, ensure you have:
     hf download ChenLiu1996/ImmunoStruct --repo-type dataset --local-dir ./
     ```
 
-2. Make sure the following files are in the `data` folder:
+2. Move the pre-trained model weights.
+    ```sh
+    mkdir ../results/
+    mv IEDB_model_seed1.pt ../results/
+    mv CEDAR_model_seed2.pt ../results/
+    ```
+
+3. Make sure the following files are in the `data` folder:
     - `ImmunoStruct_IEDB_data.csv`
     - `ImmunoStruct_CEDAR_data_cancer.csv`
     - `ImmunoStruct_CEDAR_data_wildtype.csv`
@@ -209,7 +216,7 @@ Before installation, ensure you have:
     - `ImmunoStruct_clinical_data_survival.csv`
     - `HLA_allele_sequences.csv`
 
-3. Unzip the graph structure PyTorch files.
+4. Unzip the graph structure PyTorch files.
     ```sh
     unzip graph_pyg_IEDB.zip
     unzip graph_pyg_CEDAR_cancer.zip
@@ -223,7 +230,7 @@ Before installation, ensure you have:
     - `graph_pyg_CEDAR_wildtype`
     - `graph_pyg_clinical`
 
-4. If you want to customize the graph-building logic, the graph structure PDB files produced by AlphaFold2 are already made available by the same huggingface download command. Unzip the corresponding zip files and you will have the following folders.
+5. If you want to customize the graph-building logic, the graph structure PDB files produced by AlphaFold2 are already made available by the same huggingface download command. Unzip the corresponding zip files and you will have the following folders.
     - `alphafold2_pdb_IEDB`
     - `alphafold2_pdb_CEDAR_cancer`
     - `alphafold2_pdb_CEDAR_wildtype`
