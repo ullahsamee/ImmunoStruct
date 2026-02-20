@@ -514,17 +514,17 @@ We have provided the structure data encoded as PyTorch Geometric (PyG) graphs on
 
 
 ### Training and Testing
-0. **Activate the environment**
+1. **Activate the environment**
     ```sh
     conda activate immuno
     export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
     ```
 
-1. **Set up Weights & Biases**
+2. **Set up Weights & Biases**
 
    Create a project on [Weights & Biases](https://wandb.ai/home) matching your project name.
 
-2. **Run Experiments**
+3. **Run Experiments**
 
     NOTE: these are already deprecated. See `immunostruct/old_scripts`.
     ```sh
@@ -544,7 +544,7 @@ We have provided the structure data encoded as PyTorch Geometric (PyG) graphs on
     python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --model StructureModel --wandb-username YOUR_WANDB_USERNAME
     ```
 
-3. **Our main experiments**
+4. **Our main experiments**
 
     These are examples for training ImmunoStruct.
 
