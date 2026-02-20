@@ -14,6 +14,7 @@
   <br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-Kevin-blue)](https://www.linkedin.com/in/kevin-bijan-givechian-phd-36467ba3/)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Joao-blue)](https://www.linkedin.com/in/joao-felipe-rocha/)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Chen-blue)](https://www.linkedin.com/in/chenliu1996/)
+  [![Google Scholar](https://img.shields.io/badge/Google_Scholar-Chen-4a86cf?logo=google-scholar&logoColor=white)](https://scholar.google.com/citations?user=3rDjnykAAAAJ&sortby=pubdate)
   <br>[![Twitter Follow](https://img.shields.io/twitter/follow/Kevin.svg?style=social)](https://x.com/KevinGivechian)
   [![Twitter Follow](https://img.shields.io/twitter/follow/Chen.svg?style=social)](https://x.com/ChenLiu_1996)
   [![Twitter Follow](https://img.shields.io/twitter/follow/KrishnaswamyLab.svg?style=social)](https://x.com/KrishnaswamyLab)
@@ -75,7 +76,7 @@ News in Chinese<br>
 
 
 &#9744; TODO: create and release an end-to-end tool.
-<br>&#9744; TODO: verify, document and release the multimodal dataset, likely after the ICML deadline.
+<br>&#9744; TODO: verify, document and release the multimodal dataset. **We are actively working on this! Expect the week of Feb 27.**
 <br>&#x2705; Dec 31, 2025: **[Published](https://www.nature.com/articles/s42256-025-01163-y) in Nature Machine Intelligence.**
 <br>&#x2705; Dec 04, 2025: Informally presented at NeurIPS 2025 (did not submit, no dual-submission concern).
 <br>&#x2705; Aug 18, 2025: Received the [Colton Innovation Fund](https://ventures.yale.edu/news/yales-colton-center-autoimmunity-announces-2025-awardees-advancing-innovation-autoimmune) from [Colton Center for Autoimmunity at Yale University](https://ventures.yale.edu/colton-center-for-autoimmunity).
