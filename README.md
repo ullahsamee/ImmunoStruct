@@ -76,7 +76,7 @@ News in Chinese<br>
 
 
 &#9744; TODO: create and release an end-to-end tool.
-<br>&#9744; TODO: verify, document and release the multimodal dataset. **We are actively working on this! Expect the week of Feb 27.**
+<br>&#x2705; Feb 20, 2026: The datasets and model weights are now [open-sourced on huggingface](https://huggingface.co/datasets/ChenLiu1996/ImmunoStruct).
 <br>&#x2705; Dec 31, 2025: **[Published](https://www.nature.com/articles/s42256-025-01163-y) in Nature Machine Intelligence.**
 <br>&#x2705; Dec 04, 2025: Informally presented at NeurIPS 2025 (did not submit, no dual-submission concern).
 <br>&#x2705; Aug 18, 2025: Received the [Colton Innovation Fund](https://ventures.yale.edu/news/yales-colton-center-autoimmunity-announces-2025-awardees-advancing-innovation-autoimmune) from [Colton Center for Autoimmunity at Yale University](https://ventures.yale.edu/colton-center-for-autoimmunity).
