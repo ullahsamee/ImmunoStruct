@@ -154,65 +154,37 @@ Before installation, ensure you have:
 ### Installation
 
 1. **Clone the repository**
-   ```sh
-   git clone https://github.com/KrishnaswamyLab/ImmunoStruct.git
-   cd ImmunoStruct
-   ```
+    ```sh
+    git clone https://github.com/KrishnaswamyLab/ImmunoStruct.git
+    cd ImmunoStruct
+    ```
 
-2. **Create and activate conda environment**
-   ```sh
-   conda create --name immuno python=3.8 -c anaconda -c conda-forge -y
-   conda activate immuno
-   ```
+2. **Create conda environment and install dependencies**
+    ```sh
+    conda create --name immuno python=3.8 -c anaconda -c conda-forge -y
+    conda activate immuno
+    conda install cudatoolkit=11.2 wandb pydantic -c conda-forge -y
+    conda install scikit-image pillow matplotlib seaborn tqdm -c anaconda -y
+    python -m pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu118
+    python -m pip install dgl -f https://data.dgl.ai/wheels/torch-2.1/cu118/repo.html
+    python -m pip install torchdata==0.7.1
+    python -m pip install torch-scatter==2.1.2+pt21cu118 torch-sparse==0.6.18+pt21cu118 torch-cluster==1.6.3+pt21cu118 torch-spline-conv==1.2.2+pt21cu118 torch_geometric==2.5.3 numpy==1.21.1 -f https://data.pyg.org/whl/torch-2.1.2+cu118.html
+    python -m pip install jax==0.2.25 jaxlib==0.1.69+cuda111 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+    python -m pip install "alphafold-colabfold==2.0.0" "colabfold==1.2.0" "dm-haiku==0.0.4"
+    python -m pip install "biopython==1.78"
+    python -m pip install graphein[extras]
+    python -m pip install lifelines
+    python -m pip install huggingface_hub
+    ```
 
-3. **Install core dependencies**
-   ```sh
-   conda install cudatoolkit=11.2 wandb pydantic -c conda-forge -y
-   conda install scikit-image pillow matplotlib seaborn tqdm -c anaconda -y
-   ```
+    The following steps might be necessary if you encounter problems running the inference. These are some package incompatibilities that we managed to resolve in a manual way:
+    ```
+    Go to /path/to/environment/lib/python3.8/site-packages/jaxlib/xla_client.py: change `np.object` to `object`.
+    Go to /path/to/environment/lib/python3.8/site-packages/alphafold/common/residue_constants.py: change `np.int` to `np.int32`.
+    Go to /path/to/environment/lib/python3.8/site-packages/alphafold/data/templates.py: change `np.object` to `object`.
+    ```
 
-4. **Install PyTorch**
-   ```sh
-   python -m pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu118
-   ```
-
-5. **Install DGL**
-   ```sh
-   python -m pip install dgl -f https://data.dgl.ai/wheels/torch-2.1/cu118/repo.html
-   python -m pip install torchdata==0.7.1
-   ```
-
-6. **Install PyTorch Geometric and related packages**
-   ```sh
-   python -m pip install torch-scatter==2.1.2+pt21cu118 torch-sparse==0.6.18+pt21cu118 torch-cluster==1.6.3+pt21cu118 torch-spline-conv==1.2.2+pt21cu118 torch_geometric==2.5.3 numpy==1.21.1 -f https://data.pyg.org/whl/torch-2.1.2+cu118.html
-   ```
-
-7. **Install AlphaFold2-related packages**
-   ```sh
-   python -m pip install jax==0.2.25 jaxlib==0.1.69+cuda111 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-   python -m pip install "alphafold-colabfold==2.0.0" "colabfold==1.2.0" "dm-haiku==0.0.4"
-   python -m pip install "biopython==1.78"
-   ```
-
-   Go to /path/to/environment/lib/python3.8/site-packages/jaxlib/xla_client.py: change `np.object` to `object`.
-
-   Go to /path/to/environment/lib/python3.8/site-packages/alphafold/common/residue_constants.py: change `np.int` to `np.int32`.
-
-   Go to /path/to/environment/lib/python3.8/site-packages/alphafold/data/templates.py: change `np.object` to `object`.
-
-8. **Install additional packages**
-   ```sh
-   python -m pip install graphein[extras]
-   python -m pip install lifelines
-   python -m pip install huggingface_hub
-   ```
-
-9. **Set up environment variables (if needed)**
-   ```sh
-   export LD_LIBRARY_PATH=/path/to/conda/envs/immuno/lib:$LD_LIBRARY_PATH
-   ```
-
-10. Another environment for obtaining MSAs locally.
+3. Create and build another environment for obtaining MSAs locally. Only relevant if you want to run your own protein folding.
     ```sh
     conda create --name local_msa python=3.10 -c anaconda -c conda-forge -y
     conda activate local_msa
@@ -232,7 +204,7 @@ Before installation, ensure you have:
 ### Data Preparation
 
 1. Download the dataset from huggingface.
-    ```
+    ```sh
     conda activate immuno
     cd ./data/
     hf download ChenLiu1996/ImmunoStruct --repo-type dataset --local-dir ./
@@ -247,7 +219,7 @@ Before installation, ensure you have:
     - `HLA_allele_sequences.csv`
 
 3. Unzip the graph structure PyTorch files.
-    ```
+    ```sh
     unzip graph_pyg_IEDB.zip
     unzip graph_pyg_CEDAR_cancer.zip
     unzip graph_pyg_CEDAR_wildtype.zip
