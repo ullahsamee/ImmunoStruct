@@ -229,9 +229,9 @@ Before installation, ensure you have:
     - `alphafold2_pdb_CEDAR_wildtype`
     - `alphafold2_pdb_clinical`
 
-**PyG graph files**
+### AlphaFold2 Structure Data
 
-We have provided the PyTorch Geometric (PyG) graphs on huggingface. You just need to download them and put them under `data` folder.
+We have provided the structure data encoded as PyTorch Geometric (PyG) graphs on huggingface. You just need to follow the instruction in the previous **Data Preparation** section.
 
 <details>
   <summary>How the PyG graphs are generated</summary>
