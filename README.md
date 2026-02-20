@@ -231,7 +231,7 @@ Before installation, ensure you have:
 
 ### AlphaFold2 Structure Data
 
-We have provided the structure data encoded as PyTorch Geometric (PyG) graphs on huggingface. You just need to follow the instruction in the previous **Data Preparation** section.
+We have provided the structure data encoded as PyTorch Geometric (PyG) graphs on huggingface. You just need to follow the instruction in the previous **Data Preparation** section. You can skip this section if you are not planning to fold your own data.
 
 <details>
   <summary>How the PyG graphs are generated</summary>
