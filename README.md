@@ -236,7 +236,10 @@ We have provided the structure data encoded as PyTorch Geometric (PyG) graphs on
 <details>
   <summary>How the PyG graphs are generated</summary>
 
-The PyG graphs are generated using a three-step process under `immunostruct/preprocessing`. The generation scripts are available in case you ever need to run some or all of them.
+<br>The PyG graphs are generated using a three-step process under `immunostruct/preprocessing`. The generation scripts are available in case you ever need to run some or all of them.
+
+- Option 1 is easy to perform, but it's slow and rate-limited.
+- Option 2 involves more steps, but it is more suitable to larger datasets (>2000 sequences).
 
 1. Option 1: Using the online MSA server (slow, rate-limited, not recommended for >2000 sequences). Starting at `ImmunoStruct` root folder.
     ```sh
