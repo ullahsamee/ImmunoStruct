@@ -549,7 +549,7 @@ The PyG graphs are generated using a three-step process under `immunostruct/prep
 
 3. **Our main experiments**
 
-    These are examples for running the training and inference.
+    These are examples for training ImmunoStruct.
 
     ```sh
     # IEDB training
@@ -565,7 +565,7 @@ The PyG graphs are generated using a three-step process under `immunostruct/prep
     python infer_IEDB_or_CEDAR.py --infer_dataset IEDB --model HybridModelv2 --model-path ../results/IEDB_model.pt --full-sequence
 
     # CEDAR inference
-    python infer_IEDB_or_CEDAR.py --infer_dataset CEDAR --model HybridModel_Comparative --model-path ../results/CEDAR_model.pt --full-sequence --use-wt-for-downstream
+    python infer_IEDB_or_CEDAR.py --infer_dataset CEDAR --model HybridModel_Comparative --model-path ../results/CEDAR_model.pt --full-sequence
 
     # Clinical inference
     python infer_clinical_only.py --model HybridModel_Comparative --model-path ../results/CEDAR_model.pt --full-sequence --use-wt-for-downstream

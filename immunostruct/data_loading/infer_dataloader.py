@@ -19,7 +19,7 @@ class ImmunoPredInferDataset(Dataset):
         self.hla_path = hla_path
 
         graphs = preprocess_graphs(graph_directory)
-        foreignness_dict, biochem_property_dict, immunogenicity_dict, mhc_pep_pair_list = preprocess_properties(property_path, True if "Cancer" in graph_directory else False)
+        foreignness_dict, biochem_property_dict, immunogenicity_dict, mhc_pep_pair_list = preprocess_properties(property_path, True if "CEDAR" in graph_directory else False)
         name_mapper = preprocess_hla(mhc_pep_pair_list, hla_path)
         name_mapper, graph_mapper = preprocess_sequence_graph(name_mapper, graphs, immunogenicity_dict, foreignness_dict)
         graph_mapper = preprocess_graph(graph_mapper, config.feature_size, config.coord_size)
