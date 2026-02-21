@@ -27,31 +27,14 @@ In case you don't have access to Nature, here are the [main paper](pdf/ImmunoStr
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#news">News</a>
-    </li>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#key-features">Key Features</a></li>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#citation">Citation</a></li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
+    <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#model-architecture">Model Architecture</a></li>
     <li><a href="#troubleshooting">Troubleshooting</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
