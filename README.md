@@ -22,7 +22,7 @@
 </div>
 
 Project leads: [Kevin Bijan Givechian](https://www.linkedin.com/in/kevin-bijan-givechian-phd-36467ba3/), [João Felipe Rocha](https://www.linkedin.com/in/joao-felipe-rocha/), [Chen Liu](https://www.linkedin.com/in/chenliu1996/).
-<br>Correspondence: [akiko.iwasaki@yale.edu](mailto:akiko.iwasaki@yale.edu); [smita.krishnaswamy@yale.edu](mailto:smita.krishnaswamy@yale.edu).
+<br>Correspondence: `akiko.iwasaki@yale.edu`; `smita.krishnaswamy@yale.edu`.
 
 
 In case you don't have access to Nature, here are the [main paper](pdf/ImmunoStruct_NMI.pdf) and the [supplementary materials](pdf/ImmunoStruct_NMI_supp.pdf).
