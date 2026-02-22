@@ -506,36 +506,16 @@ We have provided the structure data encoded as PyTorch Geometric (PyG) graphs on
 
    Create a project on [Weights & Biases](https://wandb.ai/home) matching your project name.
 
-3. **Run Experiments**
-
-    NOTE: these are already deprecated. See `immunostruct/old_scripts`.
-    ```sh
-    # Sequence + structure + biochemical property + multimodal multihead attention
-    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model HybridModelv2 --wandb-username YOUR_WANDB_USERNAME
-
-    # Sequence + structure + biochemical property
-    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model HybridModel --wandb-username YOUR_WANDB_USERNAME
-
-    # Sequence + biochemical property
-    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model SequenceFpModel --wandb-username YOUR_WANDB_USERNAME
-
-    # Sequence-only model
-    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --sequence-loss --model SequenceModel --wandb-username YOUR_WANDB_USERNAME
-
-    # Structure-only model
-    python train_PropIEDB_PropCancer_ImmunoCancer.py --full-sequence --model StructureModel --wandb-username YOUR_WANDB_USERNAME
-    ```
-
-4. **Our main experiments**
+3. **Our main experiments**
 
     These are examples for training ImmunoStruct.
 
     ```sh
     # IEDB training
-    python train_IEDB_wFT.py --model HybridModelv2 --sequence-loss --full-sequence --seed 1 --wandb-username immunoteam
+    python train_IEDB_wFT.py --model HybridModelv2 --sequence-loss --full-sequence --seed 1 --wandb-username YOUR_WANDB_USERNAME
 
     # CEDAR training
-    python train_CEDAR_wFT.py --model HybridModelv2_Comparative --sequence-loss --full-sequence --comparative --use-wt-for-downstream --seed 1 --wandb-username immunoteam
+    python train_CEDAR_wFT.py --model HybridModel_Comparative --sequence-loss --full-sequence --comparative --seed 1 --wandb-username YOUR_WANDB_USERNAME
     ```
 
     For running inference using the models we provide:
