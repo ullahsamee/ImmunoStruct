@@ -154,7 +154,7 @@ Before installation, ensure you have:
     python -m pip install ipywidgets
     ```
 
-    The following steps might be necessary if you encounter problems running the inference. These are some package incompatibilities that we managed to resolve in a manual way:
+    The following steps might be necessary if you encounter problems when running the inference. These are some package incompatibilities that we managed to resolve in a manual way:
     - Go to `PATH_TO_ENV/lib/python3.8/site-packages/jaxlib/xla_client.py`: change `np.object` to `object`.
     - Go to `PATH_TO_ENV/lib/python3.8/site-packages/alphafold/common/residue_constants.py`: change `np.int` to `np.int32`.
     - Go to `PATH_TO_ENV/lib/python3.8/site-packages/alphafold/data/templates.py`: change `np.object` to `object`.
