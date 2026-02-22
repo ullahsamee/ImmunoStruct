@@ -12,7 +12,7 @@
   [![Huggingface](https://img.shields.io/badge/Model-ImmunoStruct-orange)](https://huggingface.co/ChenLiu1996/ImmunoStruct)
   [![GitHub Stars](https://img.shields.io/github/stars/KrishnaswamyLab/ImmunoStruct.svg?style=social\&label=Stars)](https://github.com/KrishnaswamyLab/ImmunoStruct)
   <br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-Kevin-blue)](https://www.linkedin.com/in/kevin-bijan-givechian-phd-36467ba3/)
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Joao-blue)](https://www.linkedin.com/in/joao-felipe-rocha/)
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-João-blue)](https://www.linkedin.com/in/joao-felipe-rocha/)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Chen-blue)](https://www.linkedin.com/in/chenliu1996/)
   [![Google Scholar](https://img.shields.io/badge/Google_Scholar-Chen-4a86cf?logo=google-scholar&logoColor=white)](https://scholar.google.com/citations?user=3rDjnykAAAAJ&sortby=pubdate)
   <br>[![Twitter Follow](https://img.shields.io/twitter/follow/Kevin.svg?style=social)](https://x.com/KevinGivechian)
