@@ -178,19 +178,17 @@ Before installation, ensure you have:
 
 ### Data Preparation
 
-1. Download the dataset from huggingface.
+1. Download the dataset from huggingface. Starting at the project root (`ImmunoStruct`):
     ```sh
     conda activate immuno
     cd ./data/
     hf download ChenLiu1996/ImmunoStruct --repo-type dataset --local-dir ./
     ```
 
-2. Download the pre-trained model weights from huggingface.
+2. Download the pre-trained model weights from huggingface. Starting at the project root (`ImmunoStruct`):
     ```sh
-    mkdir ../checkpoints/
-    cd ../checkpoints/
+    cd ./checkpoints/
     hf download ChenLiu1996/ImmunoStruct --local-dir ./
-    cd ../data/
     ```
 
 3. Make sure the following files are in the `data` folder:
